@@ -21,7 +21,16 @@ jobs:
       - uses: dart-lang/setup-dart@v1
       - run: dart pub get
       - run: dart pub run grinder protobuf
-      - name: Deploy
-        run: dart pub run grinder pkg-compile-snapshot pkg-github-release pkg-github-linux
+      - name: Compile
+        run: dart pub run grinder pkg-compile-snapshot
         env: {GH_BEARER_TOKEN: "${{ github.token }}"}
+      - name: Upload binaries to tag
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/dart-sass-embedded.snapshot
+          asset_name: dart-sass-embedded.snapshot
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "This is my release text"
 
