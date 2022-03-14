@@ -22,6 +22,6 @@ jobs:
       - run: dart pub get
       - run: dart pub run grinder protobuf
       - name: Deploy
-        run: dart pub run grinder pkg-compile-native
+        run: dart pub run grinder pkg-compile-snapshot pkg-github-release
         env: {GH_BEARER_TOKEN: "${{ github.token }}"}
 
