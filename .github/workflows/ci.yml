@@ -24,13 +24,14 @@ jobs:
       - name: Compile
         run: dart pub run grinder pkg-compile-snapshot
         env: {GH_BEARER_TOKEN: "${{ github.token }}"}
+      - name: Archive
+        run: tar -cf dart-sass-embedded-x64.tar.gz /opt/hostedtoolcache/dart-sdk/bin/dart ./build/dart-sass-embedded.snapshot
       - name: Upload binaries to tag
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ github.token }}
-          file: ./build/dart-sass-embedded.snapshot
-          asset_name: dart-sass-embedded.snapshot
-          tag: ${{ github.ref }}
+          file: ./dart-sass-embedded-x64.tar.gz
+          asset_name: dart-sass-embedded-x64.tar.gz
+          tag: dart-sass-embedded-x64-snapshot
           overwrite: true
-          body: "This is my release text"
-
+          
