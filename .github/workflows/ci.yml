@@ -27,8 +27,8 @@ jobs:
       - name: Upload binaries to tag
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/dart-sass-embedded.snapshot
+          repo_token: ${{ github.token }}
+          file: ./build/dart-sass-embedded.snapshot
           asset_name: dart-sass-embedded.snapshot
           tag: ${{ github.ref }}
           overwrite: true
